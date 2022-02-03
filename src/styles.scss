@@ -6,6 +6,7 @@
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --blue: blue;
 }
 
 * {
@@ -114,6 +115,7 @@ img {
   background: none;
   padding: 0;
   margin: 0;
+  color: var(--blue);
 }
 
 .btn-block {
