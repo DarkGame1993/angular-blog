@@ -35,10 +35,11 @@ export class LoginPageComponent implements OnInit {
     if (this.form.invalid) {
       return 
     }
-
+    
     const user: User = {
       email: this.form.value.email,
-      password: this.form.value.password
+      password: this.form.value.password,
+      returnSecureToken: this.form.value.boolean
     }
 
     this.auth.login(user).subscribe(() => {
