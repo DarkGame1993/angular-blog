@@ -12,7 +12,12 @@ export class AuthService {
     }
 
     get token(): string {
-        return ''
+        const expDate = new Date (localStorage.getItem("fb-token-exp")!);
+        if (new Date() > expDate) {
+            this.logout()
+            return null as any;
+        }
+        return localStorage.getItem('fb-token')!;
     }
 
     login(user: User): Observable<FbAuthResponse> {
@@ -23,14 +28,21 @@ export class AuthService {
             )
     }
     logout() {
-
+        this.setToken(null)
     }
 
     isAuthenticated():boolean {
         return !!this.token
     }
 
-    private setToken(response: FbAuthResponse) {
-        console.log(response)
+    private setToken(response: FbAuthResponse | null) {
+        if ( response ) {
+            const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
+            localStorage.setItem('fb-token', response.idToken);
+            localStorage.setItem('fb-token-exp', expDate.toString());
+        } else (
+            localStorage.clear()
+        )
+        
     }
 }
