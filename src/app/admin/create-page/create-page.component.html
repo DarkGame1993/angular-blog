@@ -11,16 +11,14 @@
             *ngIf="form.controls['title']?.touched && form.controls['title']?.invalid" 
             class="validation"
         >
-            <small *ngIf="form.controls['email'].hasError('required')">
+            <small *ngIf="form.controls['title'].hasError('required')">
                 Enter title fild
             </small>
         </div>
     </div>
 
     <div class="form-control">
-        <label>
-            Content of post:
-        </label>
+        <quill-editor formControlName="text"></quill-editor>
     </div>
 
     <div 
