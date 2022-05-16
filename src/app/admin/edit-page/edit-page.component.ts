@@ -11,27 +11,44 @@ import { PostsService } from 'src/app/shared/posts.service';
   styleUrls: ['./edit-page.component.scss']
 })
 export class EditPageComponent implements OnInit {
-  
+  post: Post;
   form: FormGroup;
+  submitted = false;
 
   constructor(
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
     private postsService: PostsService
   ) { }
 
   ngOnInit(): void {
 
-    this.router.params.pipe(
+    this.route.params.pipe(
       switchMap((params: Params) => {
         return this.postsService.getById(params['id'])
       })
     ).subscribe((post: Post) => {
+      this.post = post;
       this.form = new FormGroup({
         title: new FormControl(post.title, Validators.required),
         text: new FormControl(post.text, Validators.required)
       })
     })
   }
-  submit () {}
+  submit () {
+    
+    if(this.form.invalid) {
+      return
+    }
+
+    this.submitted = true;
+
+    this.postsService.update({
+      ...this.post,
+      title: this.form.value.title,
+      text: this.form.value.text
+    }).subscribe(() =>{
+      this.submitted = false;
+    })
+  }
 
 }
