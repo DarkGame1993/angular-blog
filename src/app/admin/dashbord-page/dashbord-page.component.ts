@@ -9,8 +9,10 @@ import { PostsService } from 'src/app/shared/posts.service';
   styleUrls: ['./dashbord-page.component.scss']
 })
 export class DashbordPageComponent implements OnInit, OnDestroy {
+  
   posts: Post[]= [];
-  pSub: Subscription
+  pSub: Subscription;
+  searchStr = '';
 
   constructor(private postsService: PostsService) {
 
