@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./admin-layout.component.scss']
 })
 export class AdminLayoutComponent implements OnInit {
+  status: boolean = false;
 
   constructor(
     private router: Router,
@@ -22,5 +23,13 @@ export class AdminLayoutComponent implements OnInit {
     event.preventDefault();
     this.auth.logout();
     this.router.navigate(['/admin', 'login']);
+  }
+
+  clickEvent() {
+    this.status = true;
+  }
+
+  clickEventClose() {
+    this.status = false;
   }
 }

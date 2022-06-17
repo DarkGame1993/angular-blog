@@ -1,51 +1,79 @@
-<form class="card" [formGroup]="form" (ngSubmit)="submit()">
-    <h2>Enter admin panel</h2>
-
-    <div class="alert alert-danger" *ngIf="auth.error$ | async as error">{{ error }}</div>
-    <div class="alert alert-info" *ngIf="message">{{ message }}</div>
-    
-    <div 
-        [ngClass]="{invalid: form.controls['email']?.touched && form.controls['email']?.invalid}"
-        class="form-control"
-    >
-        <label for="email">Email:</label>
-        <input id="email" type="email" formControlName="email">
-        <div
-            *ngIf="form.controls['email']?.touched && form.controls['email']?.invalid" 
-            class="validation"
-        >
-            <small *ngIf="form.controls['email'].hasError('required')">
-                Enter email fild
-            </small>
-            <small *ngIf="form.controls['email'].hasError('email')">
-                Email fild must be email
-            </small>
-        </div>
-    </div>
-    <div 
-        [ngClass]="{invalid: form.controls['password']?.touched && form.controls['password']?.invalid}"
-        class="form-control"
-    >
-        <label for="password">Password:</label>
-        <input id="password" type="password" formControlName="password">
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+      <div>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in admin panel</h2>
+      </div>
+      <form class="mt-8 space-y-6" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="alert alert-danger" *ngIf="auth.error$ | async as error">{{ error }}</div>
+        <div class="alert alert-info" *ngIf="message">{{ message }}</div>
+        
         <div 
-            *ngIf="form.controls['password']?.touched && form.controls['password']?.invalid" 
-            class="validation"
+            [ngClass]="{invalid: form.controls['email']?.touched && form.controls['email']?.invalid}"
+            class="form-control"
         >
-            <small *ngIf="form.controls['password'].hasError('required')">
-                Enter password
-            </small>
-            <small *ngIf="form.controls['password'].hasError('minlength')">
-                Fild must be at least 
-                {{form.get('password').errors['minlength'].requiredLength }} symbol. Now 
-                {{form.get('password').errors['minlength'].actualLength }} symbols.
-            </small>
+            <label 
+                for="email"
+                class="block text-sm font-medium text-gray-700"
+                >
+                Email:</label>
+            <input 
+                id="email" 
+                type="email" 
+                formControlName="email"
+                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+            <div
+                *ngIf="form.controls['email']?.touched && form.controls['email']?.invalid" 
+                class="validation"
+            >
+                <small *ngIf="form.controls['email'].hasError('required')">
+                    Enter email fild
+                </small>
+                <small *ngIf="form.controls['email'].hasError('email')">
+                    Email fild must be email
+                </small>
+            </div>
         </div>
+        <div 
+            [ngClass]="{invalid: form.controls['password']?.touched && form.controls['password']?.invalid}"
+            class="form-control"
+        >
+            <label 
+                class="block text-sm font-medium text-gray-700"
+                for="password">Password:</label>
+            <input 
+                id="password" 
+                type="password" 
+                formControlName="password" 
+                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+            <div 
+                *ngIf="form.controls['password']?.touched && form.controls['password']?.invalid" 
+                class="validation"
+            >
+                <small *ngIf="form.controls['password'].hasError('required')">
+                    Enter password
+                </small>
+                <small *ngIf="form.controls['password'].hasError('minlength')">
+                    Fild must be at least 
+                    {{form.get('password').errors['minlength'].requiredLength }} symbol. Now 
+                    {{form.get('password').errors['minlength'].actualLength }} symbols.
+                </small>
+            </div>
+        </div>
+        <div>
+            <button 
+                type="submit" 
+                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                [disabled]="form.invalid || submitted"
+                >
+                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                    <!-- Heroicon name: solid/lock-closed -->
+                    <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+                Login
+            </button>
+          </div>
+    </form>
     </div>
-
-    <button 
-        type="submit" 
-        class="btn btn-primary"
-        [disabled]="form.invalid || submitted">
-        Login</button>
-</form>
+  </div>
