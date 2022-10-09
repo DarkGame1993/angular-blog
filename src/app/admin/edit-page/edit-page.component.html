@@ -1,6 +1,10 @@
 <div *ngIf="form; else loading">
+    <div class="flex justify-between">
+        <h2>Update post</h2> 
+        <a [routerLink]="['/admin', 'dashbord']" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-700">Back</a>
+    </div>
     <form [formGroup]="form" (ngSubmit)="submit()">
-        <h2>Update post</h2>
+        
     
         <div 
             [ngClass]="{invalid: form.controls['title']?.touched && form.controls['title']?.invalid}"
